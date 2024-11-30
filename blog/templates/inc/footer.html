@@ -1,0 +1,32 @@
+{% load static %}
+<div class="blog_copyright_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <p>Copyright &copy; 2024 <a href="{% url 'blog:index' %}">Wlog</a>. All Right Reserved.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <ul class="blog_footer_menu">
+                    <li><a href="{% url 'blog:index' %}">Home</a></li>
+                    <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                    <li><a href="{% url 'blog:contact' %}">Login</a></li>
+                    <li><a href="{% url 'blog:contact' %}">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--Main js file Style-->
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/theia-sticky-sidebar.js' %}"></script>
+<script src="{% static 'js/plugins/swiper/swiper.min.js' %}"></script>
+<script src="{% static 'js/plugins/magnific/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+{% block extra_footer %}
+{% endblock %}
+<!--Main js file Style-->
+</body>
+</html>

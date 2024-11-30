@@ -1,7 +1,10 @@
 # urls.py
 from django.urls import path
-from blog.views import under_development
+from blog.views import index, contact
+
+app_name = "blog"
 
 urlpatterns = [
-    path("", under_development, name="under_development"),
+    path("", index, name="index"),
+    path("/contact-us", contact, name="contact"),
 ]

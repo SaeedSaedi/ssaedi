@@ -1,0 +1,17 @@
+{% include "inc/header.html" %}
+{% include "inc/navbar.html" %}
+	<div class="blog_main_wrapper blog_toppadder30 blog_bottompadder60">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 col-md-12 col-sm-12 col-12">
+					<div class="blog_technology blog_topheading_slider_nav">
+						{% block content %}
+            			{% endblock %}
+					</div>
+				</div>
+				{% include "inc/sidebar.html" %}
+			</div>
+		</div>
+	</div>
+
+{% include "inc/footer.html" %}
