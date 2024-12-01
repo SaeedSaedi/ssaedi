@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SSaedi - TECH Blog</title>
+    <title>{% if post %}{{ post.title }}{% else %}{{ title }}{% endif %}</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="Blog">
