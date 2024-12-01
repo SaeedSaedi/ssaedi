@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
-    'django.contrib.sites',
+    "django.contrib.sites",
     "blog.apps.BlogConfig",
+    "django_summernote",
 ]
 
 SITE_ID = 2
@@ -143,3 +144,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
