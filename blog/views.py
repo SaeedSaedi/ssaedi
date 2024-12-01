@@ -55,7 +55,9 @@ def index(request):
 def blog_search(request):
     search_query = request.GET.get("q", "")
     posts = Post.objects.filter(status="published", content__icontains=search_query)
-
+    posts = Paginator(posts, 4)
+    page_number = request.GET.get("page", 1)
+    posts = posts.get_page(page_number)
     return render(request, "index.html", context={"posts": posts})
 
 
