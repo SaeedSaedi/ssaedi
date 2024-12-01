@@ -1,6 +1,7 @@
 {% extends "./base.html" %}
 {% load humanize %}
 {% block content %}
+{% load blog_tags %}
 <div class="blog_main_heading_div wow fadeInUp">
     <div class="blog_heading_div">
         <h3 class="blog_bg_darkblue">News</h3>
@@ -55,12 +56,12 @@
                             <ul class="pagination">
                                 {% if posts.has_previous %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=1" aria-label="First">
+                                        <a class="page-link" href="?{% param_replace page=1 %}" aria-label="First">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                                        <a class="page-link" href="?{% param_replace page=posts.previous_page_number %}" aria-label="Previous">
                                             <span aria-hidden="true">&lsaquo;</span>
                                         </a>
                                     </li>
@@ -70,12 +71,12 @@
                                 </li>
                                 {% if posts.has_next %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                                        <a class="page-link" href="?{% param_replace page=posts.next_page_number %}" aria-label="Next">
                                             <span aria-hidden="true">&rsaquo;</span>
                                         </a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+                                        <a class="page-link" href="?{% param_replace page=posts.paginator.num_pages %}" aria-label="Last">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
