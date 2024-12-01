@@ -72,3 +72,11 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("blog:post_detail", kwargs={"post_id": self.id})
+
+
+class Newsletter(models.Model):
+    email = models.EmailField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.email
