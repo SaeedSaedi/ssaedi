@@ -1,10 +1,27 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Category, Tag
 
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.filter(status="Published")
+    category = request.GET.get("category")
+    tag = request.GET.get("tag")
+
+    posts = Post.objects.filter(status="published")
+
+    if category:
+        try:
+            category = Category.objects.get(name=category)
+            posts = posts.filter(category=category)
+        except Category.DoesNotExist:
+            posts = Post.objects.none()
+
+    if tag:
+        try:
+            tag = Tag.objects.get(name=tag)
+            posts = posts.filter(tags=tag)
+        except Tag.DoesNotExist:
+            posts = Post.objects.none()
 
     return render(request, "index.html", context={"posts": posts})
 
