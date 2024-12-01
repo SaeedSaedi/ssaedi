@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Category, Tag, User
 from blog.forms import NewsletterForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -43,6 +44,10 @@ def index(request):
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field.capitalize()}: {error}")
+
+    posts = Paginator(posts, 4)
+    page_number = request.GET.get("page", 1)
+    posts = posts.get_page(page_number)
 
     return render(request, "index.html", context={"posts": posts})
 
