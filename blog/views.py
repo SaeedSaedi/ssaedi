@@ -66,7 +66,7 @@ def blog_search(request):
 
 
 def contact(request):
-    return render(request, "contactus.html")
+    return render(request, "contactus.html", context={"title": "Contact Us"})
 
 
 def post_single(request, post_id):
