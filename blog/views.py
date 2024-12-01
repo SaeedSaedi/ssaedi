@@ -49,7 +49,7 @@ def index(request):
     page_number = request.GET.get("page", 1)
     posts = posts.get_page(page_number)
 
-    return render(request, "index.html", context={"posts": posts})
+    return render(request, "index.html", context={"posts": posts, "title": "Home"})
 
 
 def blog_search(request):
@@ -58,7 +58,11 @@ def blog_search(request):
     posts = Paginator(posts, 4)
     page_number = request.GET.get("page", 1)
     posts = posts.get_page(page_number)
-    return render(request, "index.html", context={"posts": posts})
+    return render(
+        request,
+        "index.html",
+        context={"posts": posts, "title": "Search for: " + search_query},
+    )
 
 
 def contact(request):
