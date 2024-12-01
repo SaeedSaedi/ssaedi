@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Category, Tag, User
-from blog.forms import NewsletterForm
+from blog.forms import NewsletterForm, PostForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 
@@ -84,3 +84,14 @@ def post_single(request, post_id):
         "blog-single.html",
         context=context,
     )
+
+
+def create_post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(user=request.user)
+            return redirect("blog:index")
+    else:
+        form = PostForm()
+    return render(request, "create_post.html", {"form": form})
