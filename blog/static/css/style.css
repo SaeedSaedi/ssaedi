@@ -7262,3 +7262,51 @@ body.homepage2.single_with_sidebar .col-lg-3.col-md-12.col-sm-12.col-12.theiaSti
 .alert:hover {
     opacity: 1;
 }
+
+.paginator-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.paginator {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.page-item.disabled .page-link {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.page-item.disabled .page-link:hover {
+    background-color: #e9ecef;
+    color: #6c757d;
+}
