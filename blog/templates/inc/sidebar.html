@@ -1,0 +1,86 @@
+{% load blog_tags %}
+
+<div class="col-lg-3 col-md-12 col-sm-12 col-12 theiaStickySidebar">
+    <div class="blog_sidebar">
+
+        <div class="widget widget_recent_post wow fadeInUp">
+            <div class="blog_main_heading_div">
+                <div class="blog_heading_div">
+                    <h3 class="blog_bg_orange">What’s hot</h3>
+                </div>
+            </div>
+            <ul>
+                {% get_top_posts as top_posts %}
+                {% for post in top_posts %}
+                <li>
+                    <div class="blog_recent_post">
+                        <div class="blog_recent_post_img">
+                            <img src="{{ post.thumbnail.url }}" class="img-fluid" alt="">
+                        </div>
+                        <div class="blog_recent_post_content">
+                            <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                            <p>{{ post.created_at|date:"M d, Y" }}<a href="{% url "blog:index" %}?category={{ post.category }}">- {{ post.category }}</a></p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="widget widget_recent_news wow fadeInUp">
+            <div class="blog_main_heading_div">
+                <div class="blog_heading_div">
+                    <h3 class="blog_bg_lightblue">Recent News</h3>
+                </div>
+            </div>
+            <ul>
+
+
+                {% get_last_posts 3 as last_posts %}
+                {% for post in last_posts %}
+                <li>
+                    <div class="blog_news">
+                        <div class="blog_news_title">
+                            <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                            <p>{{ post.created_at|date:"M d, Y" }} <a href="{% url "blog:index" %}?category={{ post.category }}">- {{ post.category }}</a></p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+
+
+
+            </ul>
+        </div>
+        
+        <div class="widget widget_categories wow fadeInUp">
+            <div class="blog_main_heading_div">
+                <div class="blog_heading_div">
+                    <h3 class="blog_bg_lightgreen">categories</h3>
+                </div>
+            </div>
+            <ul>
+                {% get_category_counts as category_counts %}
+                {% for category, count in category_counts.items %}
+                <li><a href="{% url "blog:index" %}?category={{ category }}">{{ category }} <span>({{ count }})</span></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="widget widget_newsletter wow fadeInUp">
+            <div class="blog_main_heading_div">
+                <div class="blog_heading_div">
+                    <h3 class="blog_bg_pink">Subscribe</h3>
+                </div>
+            </div>
+            <div class="blog_newsletter">
+                <p>Enter Your Email To Get Notified.</p>
+                <form class="form-inline" method="post" action="{% url 'blog:index' %}" >
+                    {% csrf_token %}
+                    <div class="blog_form_group">
+                        {{ newsletter_form.email }}
+                    </div>
+                    <button type="submit" class="blog_newsletter_btn"><svg xmlns="http://www.w3.org/2000/svg" width="17px" height="16px"><path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M16.914,0.038 C16.838,-0.030 16.731,-0.046 16.639,-0.002 L0.147,7.802 C0.058,7.844 0.001,7.934 0.000,8.034 C-0.001,8.134 0.054,8.225 0.142,8.269 L4.810,10.602 C4.895,10.645 4.997,10.635 5.074,10.577 L9.611,7.123 L6.049,10.855 C5.998,10.908 5.972,10.981 5.978,11.055 L6.333,15.760 C6.340,15.864 6.409,15.953 6.507,15.986 C6.533,15.994 6.560,15.999 6.586,15.999 C6.659,15.999 6.729,15.967 6.778,15.909 L9.256,12.986 L12.318,14.476 C12.384,14.508 12.461,14.509 12.529,14.480 C12.597,14.449 12.648,14.391 12.670,14.320 L16.989,0.310 C17.019,0.212 16.990,0.105 16.914,0.038 Z"/></svg></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

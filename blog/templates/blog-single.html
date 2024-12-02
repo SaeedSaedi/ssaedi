@@ -1,0 +1,65 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="blog_post_style2 blog_single_div">
+	<div class="blog_post_style2_img wow fadeInUp">
+		<img src="{{ post.image.url }}" class="img-fluid" alt="">
+	</div>
+	<div class="blog_post_style2_content wow fadeInUp">
+		<h3>{{ post.title }}</h3>
+		<div class="blog_author_data">{{ post.author.get_full_name }}</div> 
+		<ul class="blog_meta_tags">
+			<li><span class="blog_bg_blue"><svg xmlns="http://www.w3.org/2000/svg" width="12px" height="7px"><path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M11.829,3.074 C11.732,2.948 9.422,-0.000 6.468,-0.000 C3.514,-0.000 1.203,2.948 1.106,3.074 C0.916,3.320 0.916,3.678 1.106,3.925 C1.203,4.050 3.514,6.999 6.468,6.999 C9.422,6.999 11.732,4.050 11.829,3.925 C12.020,3.678 12.020,3.320 11.829,3.074 ZM7.370,1.771 C7.569,1.651 7.846,1.788 7.989,2.077 C8.132,2.366 8.087,2.696 7.888,2.816 C7.689,2.936 7.412,2.799 7.269,2.510 C7.126,2.221 7.171,1.890 7.370,1.771 ZM6.468,5.930 C4.404,5.930 2.668,4.183 2.067,3.499 C2.473,3.037 3.397,2.091 4.589,1.525 C4.357,1.915 4.220,2.381 4.220,2.883 C4.220,4.251 5.227,5.360 6.468,5.360 C7.709,5.360 8.715,4.251 8.715,2.883 C8.715,2.381 8.579,1.915 8.346,1.525 C9.539,2.091 10.463,3.037 10.869,3.499 C10.268,4.184 8.531,5.930 6.468,5.930 Z"/></svg>{{ post.counted_views }}</span></li> 
+		</ul> 
+		<p>{{ post.content|safe }}</p>
+	</div>
+</div>
+{% if next_post %}
+<div class="next-post">
+    <a href="{% url 'blog:post_detail' next_post.id %}">Next post: {{ next_post.title }}</a>
+</div>
+{% endif %}
+{% if prev_post %}
+<div class="prev-post">
+    <a href="{% url 'blog:post_detail' prev_post.id %}">Previous post: {{ prev_post.title }}</a>
+</div>
+{% endif %}
+<div class="blog_comment_div">
+    <h3 class="wow fadeInUp">Comments <span>({{ comments.count }})</span></h3>
+    <ol class="comment-list">
+        {% for comment in comments %}
+        <li class="wow fadeInUp">
+            <div class="blog_comment">
+                <div class="blog_comment_data">
+                    <h3>{{ comment.author.username }} <span>- {{ comment.created_date|date:"j F Y" }}</span></h3>
+                    <p>{{ comment.text }}</p>
+                </div>
+            </div>
+        </li>
+        {% empty %}
+        <li class="wow fadeInUp">
+            <p>No comments yet.</p>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+{% if user.is_authenticated %}
+<div class="blog_comment_formdiv wow fadeInUp">
+    <h3>Leave Comments</h3>
+    <form method="post" class="comment-form">
+        {% csrf_token %}
+        <div class="blog_row">
+            <div class="blog_form_group">
+                {{ comment_form.text }}
+            </div>
+        </div>
+        <div class="blog_row">
+            <button type="submit" class="blog_btn blog_bg_pink">Post comment</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
+
+
+	

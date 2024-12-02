@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="post-form-container">
+    <h1>Login</h1>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}" class="form-label">Username:</label>
+            <input type="text" name="username" maxlength="150" autofocus required id="{{ form.username.id_for_label }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}" class="form-label">Password:</label>
+            <input type="password" name="password" required id="{{ form.password.id_for_label }}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p>Don't have an account? <a href="{% url 'accounts:register' %}">Register here</a></p>
+        <p>Forgot your password? <a href="{% url 'accounts:forgot_password' %}">Reset it here</a></p>
+    </form>
+</div>
+{% endblock %}
