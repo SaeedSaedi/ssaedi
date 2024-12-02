@@ -1,6 +1,6 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
-from blog.models import Newsletter, Post
+from blog.models import Newsletter, Post, Comment, Contact
 
 
 class NewsletterForm(forms.ModelForm):
@@ -49,3 +49,37 @@ class PostForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["text"]
+        widgets = {
+            "text": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Comment", "rows": 5}
+            ),
+        }
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ["first_name", "email", "phone_number", "subject", "message"]
+        widgets = {
+            "first_name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "First Name"}
+            ),
+            "email": forms.EmailInput(
+                attrs={"class": "form-control", "placeholder": "Email"}
+            ),
+            "phone_number": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Phone Number"}
+            ),
+            "subject": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Subject"}
+            ),
+            "message": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Message", "rows": 5}
+            ),
+        }
