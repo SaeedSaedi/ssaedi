@@ -75,6 +75,13 @@ def contact(request):
                 request, "Thank you for your message! We will get back to you soon."
             )
             return redirect("blog:contact")
+        else:
+            if "captcha" in form.errors:
+                messages.error(request, "Invalid CAPTCHA. Please try again.")
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{field.capitalize()}: {error}")
     else:
         form = ContactForm()
     return render(
@@ -85,6 +92,13 @@ def contact(request):
 def post_single(request, post_id):
     post = get_object_or_404(Post, id=post_id, status="Published")
     comments = post.comments.all().order_by("-created_date")
+
+    next_post = (
+        Post.objects.filter(id__gt=post.id, status="Published").order_by("id").first()
+    )
+    prev_post = (
+        Post.objects.filter(id__lt=post.id, status="Published").order_by("-id").first()
+    )
 
     post.counted_views += 1
     post.save()
@@ -100,7 +114,13 @@ def post_single(request, post_id):
     else:
         comment_form = CommentForm()
 
-    context = {"post": post, "comments": comments, "comment_form": comment_form}
+    context = {
+        "post": post,
+        "comments": comments,
+        "comment_form": comment_form,
+        "next_post": next_post,
+        "prev_post": prev_post,
+    }
 
     return render(
         request,
@@ -118,4 +138,6 @@ def create_post(request):
             return redirect("blog:index")
     else:
         form = PostForm()
-    return render(request, "create_post.html", {"form": form})
+    return render(
+        request, "create_post.html", {"form": form, "title": "Create new post"}
+    )
