@@ -27,7 +27,7 @@ def login_view(request):
             messages.error(request, "Invalid username or email, or password.")
     else:
         form = CustomAuthenticationForm()
-    return render(request, "login.html", {"form": form})
+    return render(request, "login.html", {"form": form, "title": "Login"})
 
 
 def register_view(request):
@@ -38,7 +38,6 @@ def register_view(request):
             user.email = form.cleaned_data.get("email")
             user.save()
             username = form.cleaned_data.get("username")
-            # email = form.cleaned_data.get("email")
             messages.success(
                 request, f"Account created for {username}! You can now log in."
             )
@@ -52,12 +51,15 @@ def register_view(request):
 
             return redirect("accounts:login")
         else:
-            messages.error(
-                request, "Registration failed. Please correct the errors below."
-            )
+            if "captcha" in form.errors:
+                messages.error(request, "Invalid CAPTCHA. Please try again.")
+            else:
+                messages.error(
+                    request, "Registration failed. Please correct the errors below."
+                )
     else:
         form = CustomUserCreationForm()
-    return render(request, "register.html", {"form": form})
+    return render(request, "register.html", {"form": form, "title": "Register"})
 
 
 @login_required
@@ -88,7 +90,9 @@ def forgot_password_view(request):
             messages.error(request, "Invalid username or email.")
     else:
         form = PasswordResetForm()
-    return render(request, "forgot_password.html", {"form": form})
+    return render(
+        request, "forgot_password.html", {"form": form, "title": "Forgot password"}
+    )
 
 
 class CustomPasswordResetView(PasswordResetView):
