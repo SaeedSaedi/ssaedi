@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def login_view(request):
@@ -53,3 +54,10 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, "register.html", {"form": form})
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect("blog:index")
