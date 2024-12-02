@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import CustomUserCreationForm
+from .forms import CustomAuthenticationForm
+from .forms import CustomUserCreationForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.urls import reverse_lazy
@@ -12,25 +12,21 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
+from django.contrib.auth.models import User
 
 
 def login_view(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username_or_email = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(request, username=username_or_email, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, f"Welcome back, {user.username}!")
-                return redirect("blog:index")
-            else:
-                messages.error(request, "Invalid username or email, or password.")
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f"Welcome back, {user.username}!")
+            return redirect("blog:index")
         else:
             messages.error(request, "Invalid username or email, or password.")
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     return render(request, "login.html", {"form": form})
 
 
@@ -113,3 +109,26 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "password_reset_complete.html"
+
+
+@login_required
+def profile(request):
+    user = request.user
+
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=user)
+
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, "Profile updated successfully.")
+            return redirect("blog:index")
+    else:
+        user_form = UserForm(instance=user)
+
+    return render(
+        request,
+        "profile.html",
+        {
+            "user_form": user_form,
+        },
+    )
