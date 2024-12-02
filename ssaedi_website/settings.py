@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "django.contrib.sites",
     "blog.apps.BlogConfig",
+    "accounts.apps.AccountsConfig",
     "django_summernote",
 ]
 
@@ -144,5 +145,3 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-LOGIN_URL = "/login/"
