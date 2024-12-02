@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "django_summernote",
     "captcha",
     "compressor",
-    "django.contrib.sitemaps"
+    "django.contrib.sitemaps",
+    "robots",
 ]
 
 SITE_ID = 2
@@ -175,3 +176,5 @@ COMPRESS_CSS_FILTERS = [
 COMPRESS_JS_FILTERS = [
     "compressor.filters.jsmin.JSMinFilter",
 ]
+
+ROBOTS_USE_HOST = False
