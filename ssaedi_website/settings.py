@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "compressor",
     "django.contrib.sitemaps",
     "robots",
+    "django.contrib.syndication"
 ]
 
 SITE_ID = 2

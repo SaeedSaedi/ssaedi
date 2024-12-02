@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import PostSitemap
+from blog.feeds import LatestPostsFeed
 
 sitemaps = {
     "posts": PostSitemap,
@@ -39,6 +40,7 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     path("robots.txt", include("robots.urls")),
+    path('feed/', LatestPostsFeed(), name='latest_posts_feed'),
 ]
 
 if settings.DEBUG:
