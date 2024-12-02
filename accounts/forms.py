@@ -5,9 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
+from captcha.fields import CaptchaField
 
 
 class CustomUserCreationForm(UserCreationForm):
+    captcha = CaptchaField()
     email = forms.EmailField(required=True, help_text="Enter your email address")
 
     class Meta:
