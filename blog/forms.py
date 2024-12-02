@@ -1,6 +1,7 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 from blog.models import Newsletter, Post, Comment, Contact
+from captcha.fields import CaptchaField
 
 
 class NewsletterForm(forms.ModelForm):
@@ -63,6 +64,9 @@ class CommentForm(forms.ModelForm):
 
 
 class ContactForm(forms.ModelForm):
+
+    captcha = CaptchaField()
+
     class Meta:
         model = Contact
         fields = ["first_name", "email", "phone_number", "subject", "message"]
