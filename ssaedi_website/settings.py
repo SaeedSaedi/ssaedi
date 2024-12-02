@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "django_summernote",
     "captcha",
+    "compressor",
+    "django.contrib.sitemaps"
 ]
 
 SITE_ID = 2
@@ -156,3 +158,20 @@ CAPTCHA_FOREGROUND_COLOR = "#001100"
 CAPTCHA_FONT_SIZE = 28
 CAPTCHA_IMAGE_SIZE = (200, 50)
 CAPTCHA_LENGTH = 6
+
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+)
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = [
+    "compressor.filters.css_default.CssAbsoluteFilter",
+    "compressor.filters.cssmin.CSSMinFilter",
+]
+COMPRESS_JS_FILTERS = [
+    "compressor.filters.jsmin.JSMinFilter",
+]
