@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from blog.models import Post, Category, Tag, User
-from blog.forms import NewsletterForm, PostForm
+from blog.models import Post, Category, Tag, User, Comment
+from blog.forms import NewsletterForm, PostForm, CommentForm, ContactForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -67,18 +67,40 @@ def blog_search(request):
 
 
 def contact(request):
-    return render(request, "contactus.html", context={"title": "Contact Us"})
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, "Thank you for your message! We will get back to you soon."
+            )
+            return redirect("blog:contact")
+    else:
+        form = ContactForm()
+    return render(
+        request, "contactus.html", context={"title": "Contact Us", "form": form}
+    )
 
 
 def post_single(request, post_id):
     post = get_object_or_404(Post, id=post_id, status="Published")
+    comments = post.comments.all().order_by("-created_date")
 
     post.counted_views += 1
     post.save()
 
-    context = {
-        "post": post,
-    }
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.author = request.user
+            new_comment.save()
+            return redirect("blog:post_detail", post_id=post.id)
+    else:
+        comment_form = CommentForm()
+
+    context = {"post": post, "comments": comments, "comment_form": comment_form}
 
     return render(
         request,
