@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Tag, Post, Newsletter
+from .models import Category, Tag, Post, Newsletter, Comment, Contact
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -15,3 +15,5 @@ admin.site.register(Category)
 admin.site.register(Tag)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Newsletter)
+admin.site.register(Comment)
+admin.site.register(Contact)
