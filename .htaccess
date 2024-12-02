@@ -7,6 +7,14 @@ RewriteEngine On
 # Set the base directory for the rewrite rules
 RewriteBase /
 
+# Redirect www.ssaedi.ir to ssaedi.ir
+RewriteCond %{HTTP_HOST} ^www\.ssaedi\.ir$ [NC]
+RewriteRule ^(.*)$ http://ssaedi.ir/$1 [R=301,L]
+
+# Redirect http://ssaedi.ir to https://ssaedi.ir
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://ssaedi.ir/$1 [R=301,L]
+
 # Redirect all requests to the Django application
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
