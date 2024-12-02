@@ -21,6 +21,11 @@
             <label for="id_password2" class="form-label">Confirm Password:</label>
             <input type="password" name="password2" autocomplete="new-password" required id="id_password2" class="form-control">
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="blog_form_group">
+                {{ form.captcha }}
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
     <p>Already have an account? <a href="/accounts/login/">Login here</a></p>

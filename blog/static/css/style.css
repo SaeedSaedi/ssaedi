@@ -7352,3 +7352,22 @@ body.homepage2.single_with_sidebar .col-lg-3.col-md-12.col-sm-12.col-12.theiaSti
 .post-form .btn-primary:hover {
     background-color: #0056b3;
 }
+
+.next-post, .prev-post {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.next-post a, .prev-post a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.next-post a:hover, .prev-post a:hover {
+    text-decoration: underline;
+}

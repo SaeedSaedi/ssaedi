@@ -14,6 +14,16 @@
 		<p>{{ post.content|safe }}</p>
 	</div>
 </div>
+{% if next_post %}
+<div class="next-post">
+    <a href="{% url 'blog:post_detail' next_post.id %}">Next post: {{ next_post.title }}</a>
+</div>
+{% endif %}
+{% if prev_post %}
+<div class="prev-post">
+    <a href="{% url 'blog:post_detail' prev_post.id %}">Previous post: {{ prev_post.title }}</a>
+</div>
+{% endif %}
 <div class="blog_comment_div">
     <h3 class="wow fadeInUp">Comments <span>({{ comments.count }})</span></h3>
     <ol class="comment-list">

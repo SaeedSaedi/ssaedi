@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "accounts.apps.AccountsConfig",
     "django_summernote",
+    "captcha",
 ]
 
 SITE_ID = 2
@@ -145,3 +146,13 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+CAPTCHA_CHALLENGE_FUNCT = "captcha.helpers.random_char_challenge"
+CAPTCHA_NOISE_FUNCTIONS = ("captcha.helpers.noise_null",)
+CAPTCHA_LETTER_ROTATION = (-35, 35)
+CAPTCHA_BACKGROUND_COLOR = "#ffffff"
+CAPTCHA_FOREGROUND_COLOR = "#001100"
+CAPTCHA_FONT_SIZE = 28
+CAPTCHA_IMAGE_SIZE = (200, 50)
+CAPTCHA_LENGTH = 6
