@@ -1,0 +1,30 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="post-form-container">
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_username" class="form-label">Username:</label>
+            <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="id_email" class="form-label">Email:</label>
+            <input type="email" name="email" maxlength="320" required id="id_email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="id_password1" class="form-label">Password:</label>
+            <input type="password" name="password1" autocomplete="new-password" required id="id_password1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="id_password2" class="form-label">Confirm Password:</label>
+            <input type="password" name="password2" autocomplete="new-password" required id="id_password2" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p>Already have an account? <a href="/accounts/login/">Login here</a></p>
+</div>
+{% endblock %}
+
+
