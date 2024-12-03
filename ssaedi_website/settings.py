@@ -28,7 +28,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
 
 allowed_hosts_str = os.getenv("ALLOWED_HOSTS")
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(",")]
+
+if allowed_hosts_str:
+    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(",")]
 
 
 # Application definition
@@ -190,7 +192,11 @@ COMPRESS_JS_FILTERS = [
 ROBOTS_USE_HOST = False
 
 cors_allowed_origins = os.getenv("CORS_ALLOWED_ORIGINS")
-CORS_ALLOWED_ORIGINS = [host.strip() for host in cors_allowed_origins.split(",")]
+
+if cors_allowed_origins:
+    CORS_ALLOWED_ORIGINS = [host.strip() for host in cors_allowed_origins.split(",")]
 
 csrf_trusted_origins = os.getenv("CSRF_TRUSTED_ORIGINS")
-CSRF_TRUSTED_ORIGINS = [host.strip() for host in csrf_trusted_origins.split(",")]
+
+if cors_allowed_origins:
+    CSRF_TRUSTED_ORIGINS = [host.strip() for host in csrf_trusted_origins.split(",")]
