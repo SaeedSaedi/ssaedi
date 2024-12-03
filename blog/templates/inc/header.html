@@ -1,5 +1,5 @@
 {% load static %}
-{% comment %} {% load compress %} {% endcomment %}
+{% load compress %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +10,13 @@
     <meta name="keywords" content="">
     <meta name="author" content="saedi">
     <meta name="MobileOptimized" content="320">
-    {% comment %} {% compress css %} {% endcomment %}
+    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/swiper/swiper.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/magnific/magnific-popup.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    {% comment %} {% endcompress %} {% endcomment %}
+    {% endcompress %}
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 </head>
 <body>
