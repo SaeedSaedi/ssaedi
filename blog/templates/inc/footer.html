@@ -1,5 +1,5 @@
 {% load static %}
-{% comment %} {% load compress %} {% endcomment %}
+{% load compress %}
 <div class="blog_copyright_wrapper">
     <div class="container">
         <div class="row">
@@ -19,7 +19,7 @@
 </div>
 </div>
 <!--Main js file Style-->
-{% comment %} {% compress js %} {% endcomment %}
+{% compress js %}
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/theia-sticky-sidebar.js' %}"></script>
@@ -28,7 +28,7 @@
 <script src="{% static 'js/wow.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
-{% comment %} {% endcompress %} {% endcomment %}
+{% endcompress %}
 {% block extra_footer %}
 {% endblock %}
 <!--Main js file Style-->
